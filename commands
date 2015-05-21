@@ -5,6 +5,8 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 PLUGIN_DIR=$(dirname $0)
 EXTRA_DOMAINS_LIST_FILE="$DOKKU_ROOT/EXTRA_DOMAINS"
 
+. "$PLUGIN_DIR/../common/functions"
+
 case "$1" in
   domains-extra)
     EXTRA_DOMAINS_LIST=$(cat "$EXTRA_DOMAINS_LIST_FILE")
