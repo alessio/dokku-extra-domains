@@ -30,7 +30,7 @@ case "$1" in
     if [ -z $EXTRA_DOMAINS_LIST ] ; then
       echo "No extra domains are configured"
     else
-      for domain in $(cat $EXTRA_DOMAINS_LIST ; do
+      for domain in $EXTRA_DOMAINS_LIST ; do
         dokku domains:add "$APP" "$APP.$domain" || continue
       done
     fi
