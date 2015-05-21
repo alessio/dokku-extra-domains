@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+PLUGIN_DIR=$(dirname $0)
+EXTRA_DOMAINS_LIST_FILE="$DOKKU_ROOT/EXTRA_DOMAINS"
+EXTRA_DOMAINS_LIST=$(cat "$EXTRA_DOMAINS_LIST_FILE")
+
+case "$1" in
+  domains-extra)
+    dokku_col_log_info2_quiet "Extra domains"
+    if [ -z $EXTRA_DOMAINS_LIST ] ; then
+      echo "No extra domains are configured"
+    else
+      for domain in $EXTRA_DOMAINS_LIST ; do
+        echo "$domain"
+      done
+    fi
+    ;;
+
+  domains-extra:install)
+    touch "$EXTRA_DOMAINS_LIST_FILE"
+    ;;
+
+  domains-extra:setup)
+    APP=$1
+    already_set=n
+
+    dokku_col_log_info2_quiet "Setting up extra domains ..."
+    if [ -z $EXTRA_DOMAINS_LIST ] ; then
+      echo "No extra domains are configured"
+    else
+      for domain in $(cat $EXTRA_DOMAINS_LIST ; do
+        dokku domains:add "$APP" "$APP.$domain" || continue
+      done
+    fi
+    ;;
+
+  help | domains-extra:help)
+    cat && cat<<EOF
+    domains-extra                                   List all extra domains
+EOF
+    ;;
+
+  *)
+    exit $DOKKU_NOT_IMPLEMENTED_EXIT
+    ;;
+
+esac
+
