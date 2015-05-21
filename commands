@@ -22,7 +22,7 @@ case "$1" in
     ;;
 
   domains-extra:install)
-    touch "$EXTRA_DOMAINS_LIST_FILE"
+    [[ -f "$EXTRA_DOMAINS_LIST_FILE" ]] || touch "$EXTRA_DOMAINS_LIST_FILE"
     ;;
 
   domains-extra:setup)
