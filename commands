@@ -27,7 +27,7 @@ case "$1" in
 
   domains-extra:setup)
     EXTRA_DOMAINS_LIST=$(cat "$EXTRA_DOMAINS_LIST_FILE")
-    APP=$1
+    APP=$2
     already_set=n
 
     dokku_col_log_info2_quiet "Setting up extra domains ..."
