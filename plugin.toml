@@ -1,0 +1,4 @@
+[plugin]
+description = "Add extra domains to the app once the build's finished"
+version = "1.0.0"
+[plugin.config]

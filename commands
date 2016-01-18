@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+source "$PLUGIN_CORE_AVAILABLE_PATH/common/functions"
 
 PLUGIN_DIR=$(dirname $0)
 EXTRA_DOMAINS_LIST_FILE="$DOKKU_ROOT/EXTRA_DOMAINS"
-
-. "$PLUGIN_DIR/../common/functions"
 
 case "$1" in
   domains-extra)
@@ -41,8 +40,8 @@ case "$1" in
     ;;
 
   help | domains-extra:help)
-    cat && cat<<EOF
-    domains-extra                                   List all extra domains
+    cat<<EOF
+    domains-extra, List all extra domains
 EOF
     ;;
 
